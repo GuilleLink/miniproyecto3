@@ -9,6 +9,9 @@ import numpy as np
 import random
 import math
 
+def exponential_random(lambda_max):
+    return -(1/lambda_max)*(np.log(np.random.uniform()))
+
 #Code
 def simulacion(T, lambda_max, solicitudes, servidores):
     #Tiempo inicial
@@ -50,7 +53,7 @@ def simulacion(T, lambda_max, solicitudes, servidores):
                     if ni[i] == 0:
                         ni[i] = Na
                         NTs.append(t - A[Na])
-                        td[i] = t + np.random.exponential(solicitudes)
+                        td[i] = t + exponential_random(lambda_max)
                         NTD[i] += td[i] - t
                         break
             n += 1
@@ -67,7 +70,7 @@ def simulacion(T, lambda_max, solicitudes, servidores):
                 index = max(ni) + 1
                 ni[nts] = index
                 NTs.append(t - A[Na])
-                td[nts] = t + np.random.exponential(solicitudes)
+                td[nts] = t + exponential_random(lambda_max)
                 NTD[nts] += td[nts] - t
 
             n -= 1
